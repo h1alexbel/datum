@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: datum
+  cassandra:
+    contact-points: ${CASSANDRA_HOST}
+    local-datacenter: datacenter1
+    port: 9042
+    keyspace-name: releases
+    schema-action: create_if_not_exists
+    password: ${CASSANDRA_PASSWORD}
+server:
+  shutdown: graceful
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+      base-path: /system
