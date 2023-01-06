@@ -1,7 +1,7 @@
 name: Java Maven Docker CI/CD
 on:
   push:
-    branches: [ "master" ]
+    branches: [ master ]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,12 +15,12 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn clean install
-      - name: Push to Docker Hub
-          uses: mr-smithers-excellent/docker-build-push@v5
-          with:
-            image: abialiauski/release-datum
-            tags: 0.0.$GITHUB_RUN_NUMBER, latest
-            dockerfile: Dockerfile
-            registry: docker.io
-            username: ${{ secrets.DOCKER_USERNAME }}
-            password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build and Push to Docker Hub
+        uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: abialiauski/dothem-backlog
+          tags: 0.0.$GITHUB_RUN_NUMBER, latest
+          dockerfile: Dockerfile
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
