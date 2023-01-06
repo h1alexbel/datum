@@ -1,6 +1,6 @@
 /*
 MIT License
-Copyright (c) 2022 Aliaksei Bialiauski
+Copyright (c) 2023 Aliaksei Bialiauski
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
@@ -18,19 +18,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-package org.release.datum;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 /**
+ * API.
  * @author Aliaksei Bialiauski (abialiauski@solvd.com)
  * @since 0.0.1
  */
-@SpringBootApplication
-public class ReleaseDatumApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(ReleaseDatumApplication.class, args);
-  }
-}
+package org.release.datum.api;
