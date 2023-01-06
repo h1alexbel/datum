@@ -6,8 +6,8 @@ spring:
     local-datacenter: datacenter1
     port: 9042
     keyspace-name: releases
-    schema-action: create_if_not_exists
-    password: ${CASSANDRA_PASSWORD}
+    password: ${CASSANDRA_USERNAME}
+    username: ${CASSANDRA_PASSWORD}
 server:
   shutdown: graceful
 management:
