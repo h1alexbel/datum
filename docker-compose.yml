@@ -1,17 +1,48 @@
 version: '3.8'
 services:
   cassandra:
-    image: docker.io/bitnami/cassandra:latest
-    ports:
-      - '7000:7000'
-      - '9042:9042'
-    volumes:
-      - 'cassandra_data:/bitnami'
+    container_name: datum-cassandra
+    image: bitnami/cassandra:4.0.7-debian-11-r24
     environment:
       - CASSANDRA_SEEDS=cassandra
       - CASSANDRA_PASSWORD_SEEDER=yes
-      #      - CASSANDRA_USERNAME=user
-      - CASSANDRA_PASSWORD=password
+    ports:
+      - '7000:7000'
+      - '9042:9042'
+    networks:
+      - release-datum
+    volumes:
+      - 'cassandra_data:/bitnami'
+  #      cqlsh cassandra -u cassandra -p cassandra -e "CREATE KEYSPACE release WITH REPLICATION = {'class' : 'NetworkTopologyStrategy', 'replication_factor' : 1};"
+  #    entrypoint: >
+  #      CREATE KEYSPACE release WITH REPLICATION = {'class' : 'NetworkTopologyStrategy', 'replication_factor' : 1};
+  #
+  #      CREATE TABLE release.releases
+  #      (
+  #          id    UUID PRIMARY KEY,
+  #          repo  text,
+  #          owner text,
+  #          tag   text,
+  #          title text,
+  #          body  text
+  #      );
+  datum:
+    container_name: datum
+    env_file:
+      - default.env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: release-datum:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - release-datum
+    depends_on:
+      - cassandra
 volumes:
   cassandra_data:
     driver: local
+networks:
+  release-datum:
+    driver: bridge
