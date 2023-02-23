@@ -2,7 +2,7 @@ version: '3.8'
 services:
   cassandra:
     container_name: datum-cassandra
-    image: bitnami/cassandra:4.0.7-debian-11-r24
+    image: bitnami/cassandra:4.1.0-debian-11-r24
     environment:
       - CASSANDRA_SEEDS=cassandra
       - CASSANDRA_PASSWORD_SEEDER=yes
